@@ -1,0 +1,32 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "name": "outputBlob",
+      "type": "blob",
+      "path": "function-output/{rand-guid}.json",
+      "connection": "OUTPUT_STORAGE_CONNECTION_STRING",
+      "direction": "out"
+    },
+    {
+      "name": "outputCosmos",
+      "type": "cosmosDB",
+      "databaseName": "database",
+      "collectionName": "container",
+      "createIfNotExists": true,
+      "connectionStringSetting": "OUTPUT_COSMOSDB_CONNECTION_STRING",
+      "direction": "out"
+    }
+  ]
+}

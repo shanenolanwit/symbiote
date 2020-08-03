@@ -61,3 +61,6 @@
     
 
 // }
+
+// getting a count from a cosmos db
+https://microsoft.github.io/AzureTipsAndTricks/blog/tip152.html

@@ -1,0 +1,2 @@
+LAMBDA_ENDPOINT=https://i60zeihbm4.execute-api.eu-west-1.amazonaws.com/api/ProcessTransaction
+FUNCTION_ENDPOINT=https://txmaster-11228.azurewebsites.net/api/ProcessTransaction

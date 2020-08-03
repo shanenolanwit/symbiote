@@ -37,3 +37,5 @@ node_modules
 *.zip
 
 variables.tf
+
+*.env

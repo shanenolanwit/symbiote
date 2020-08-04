@@ -64,3 +64,6 @@
 
 // getting a count from a cosmos db
 https://microsoft.github.io/AzureTipsAndTricks/blog/tip152.html
+
+
+//https://stackoverflow.com/questions/44878247/azure-function-execution-speed-is-extremely-slow-and-inconsistent

@@ -71,7 +71,7 @@ data "azurerm_storage_account_sas" "sas" {
   connection_string = azurerm_storage_account.storage.primary_connection_string
   https_only        = true
   start             = timestamp()
-  expiry            = timeadd(timestamp(), "30m")
+  expiry            = timeadd(timestamp(), "60m")
   resource_types {
     object    = true
     container = false

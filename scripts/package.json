@@ -1,0 +1,22 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "runnerHosted.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.717.0",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.1-security",
+    "loglevel": "^1.6.8",
+    "node-fetch": "^2.6.0",
+    "shortid": "^2.2.15",
+    "@azure/abort-controller": "^1.0.1",
+    "@azure/cosmos": "^3.7.4",
+    "@azure/storage-blob": "^12.2.0-preview.1"
+  }
+}

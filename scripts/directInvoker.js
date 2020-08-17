@@ -1,14 +1,75 @@
 require('dotenv').config();
-const commonHandler = require('./commonHandler');
+const commonHandler = require('../node/symbiote/commonHandler');
 
 
-const start = async(event) => {
+// const lambdaUrl = "https://shanenolanwitnodejs.azurewebsites.net/api/HttpTrigger1?code=q0YyQ5/bP49G/R6x6xcUYaWITDCJgavYeNWWp4yoPTpBvMlS4tXS1A=="
+const lambdaUrl = "https://tyz83asrz8.execute-api.eu-west-1.amazonaws.com/test/helloworld"
+
+const post = async (endpoint, payload) => {
+  const url = new URL(endpoint);
+  const { host } = url;
+  const path = url.pathname
+
+  const opts = {
+    host,
+    path,
+    uri: url.href,
+    method: 'POST',
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+//   console.log(url.href);
+//   console.log(opts)
+
+  const res = await fetch(url.href, opts);
+  const { status } = res;
+  if(status > 200){
+      console.log('fail')
+  }
+  const json = await res.text();
+//   json.status = status;
+
+  return json;
+};
+
+const invoke = async (event) => {
     try {
         const payload = event.body;
         const respBody = await commonHandler(payload);
         return { "statusCode": 200, "body": JSON.stringify(respBody, null, 2) }
     } catch(e){
         console.log(e);
-        return { "statusCode": 200, "body": JSON.stringify(respBody, null, 2) }
+        return { "statusCode": 500, "body": JSON.stringify(respBody, null, 2) }
     }  
 }
+
+const event = {
+    body: {
+        provider: 'aws',
+        service: 'db',
+        action: 'read',
+        transactionID: 'hello'
+    } 
+}
+
+async function start(){
+    // const r = await invoke(event)
+    // console.log(r)
+    for(let i=0; i < 800; i++){
+        const start = Date.now()
+        const body = {
+            name: 'Shane'
+        } 
+        // const r = await post(process.env.LAMBDA_ENDPOINT, body);
+        const r = await post(lambdaUrl, body);
+        const time = Date.now() - start;
+        // console.log(r)
+        console.log(time)
+    }
+    
+}
+
+start()

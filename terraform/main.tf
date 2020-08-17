@@ -13,7 +13,7 @@ variable "location" {
 
 ##### INITIALISE AZURE PROVIDER #####
 provider "azurerm" {
-  version = "=2.1.0"
+  version = "=2.13.0"
   features {}
 }
 

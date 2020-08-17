@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Platform config man</title>
+    <title>Symbiote</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
@@ -21,6 +21,11 @@
             text-align: center;
             color: red;
         }
+
+        #textarea-results {
+            width: 100%;
+            background-color: lightgray;
+        }
     </style>
 </head>
 
@@ -38,7 +43,52 @@
             <div id="response-editor" class="col-md-6">waiting for response ...</div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
+                <h4>Primary Provider</h4>
+                <div class="form-check">
+                    <input class="form-check-input" class="radio-provider" type="radio" name="radio-provider"
+                        id="radio-aws" value="aws" checked>
+                    <label class="form-check-label" for="radio-aws">
+                        AWS
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" class="radio-provider" type="radio" name="radio-provider"
+                        id="radio-azure" value="azure">
+                    <label class="form-check-label" for="radio-azure">
+                        Azure
+                    </label>
+                </div>
+                <div class="form-check disabled">
+                    <input class="form-check-input" class="radio-provider" type="radio" name="radio-provider"
+                        id="radio-google" value="google" disabled>
+                    <label class="form-check-label" for="radio-google">
+                        Google (not yet supported)
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4>High Availability</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="dr-enabled" id="high-availability" checked>
+                    <label class="form-check-label" for="high-availability">
+                        Enabled
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4>Templates</h4>
+                <select id="select-template" class="browser-default custom-select">
+                    <option selected>Select a template</option>
+                    <option value="1">Function Execute</option>
+                    <option value="2">Database Write</option>
+                    <option value="3">Database Read</option>
+                    <option value="4">File Write</option>
+                    <option value="5">File Read</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="btn-sendit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
@@ -62,8 +112,79 @@
         responseEditor.setShowPrintMargin(false);
         responseEditor.setReadOnly(true)
         responseEditor.getSession().setMode("ace/mode/json");
+
+        function convertIdToSampleCode(id) {
+            var code = {
+                provider: $("input[name='radio-provider']").val(),
+                service: "fn",
+                action: "execute",
+                transactionID: "abc123",
+                strategy: "demo",
+                message: "hello world",
+                duplicate: document.getElementById("high-availability").checked ? "true" : "false"
+            }
+            if (id === 1) {
+                code.service = "fn";
+                code.action = "execute";
+            } else if(id === 2){
+                code.service = "db";
+                code.action = "write";
+            } else if(id === 3){
+                code.service = "db";
+                code.action = "read";
+            } else if(id === 4){
+                code.service = "io";
+                code.action = "write";
+            } else if(id === 5){
+                code.service = "io";
+                code.action = "read";
+            }
+            return JSON.stringify(code, null, 2)
+        }
+
         $(function () {
-            console.log("ready!");
+            $('#select-template').change(function () {
+                var selectedTemplate = $(this).val();
+                requestEditor.setValue(convertIdToSampleCode(parseInt(selectedTemplate, 10)));
+            });
+
+
+            $("input[name='radio-provider']").change(function () {
+                try {
+                    var currentTemplate = JSON.parse(requestEditor.getValue());
+                    currentTemplate.provider = $(this).val()
+                    requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
+                } catch (e) {
+                    console.log('something went wrong')
+                }
+            });
+
+            $("#high-availability").change(function () {
+                var state = "true"
+                if (this.checked) {
+                    state = "true"
+                } else {
+                    state = "false"
+                }
+                try {
+                    var currentTemplate = JSON.parse(requestEditor.getValue());
+                    currentTemplate.duplicate = state
+                    requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
+                } catch (e) {
+                    console.log('something went wrong')
+                }
+
+            });
+
+            $("#btn-sendit").click(function () {
+                try {
+                    var currentTemplate = JSON.parse(requestEditor.getValue());
+                    currentTemplate.timestamp = Date.now()
+                    requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
+                } catch (e) {
+                    console.log('something went wrong')
+                }
+            });
         });
     </script>
 </body>

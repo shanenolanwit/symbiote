@@ -113,29 +113,63 @@
         responseEditor.setReadOnly(true)
         responseEditor.getSession().setMode("ace/mode/json");
 
+        function sendRequest(data) {
+            var provider = $("input[name='radio-provider']").val();
+            var entryPoint = '';
+            if(provider === 'aws'){
+                entryPoint = "https://09tafanjj0.execute-api.eu-west-1.amazonaws.com/api/ProcessTransaction";
+            } else {
+                entryPoint = "https://txmaster-11228.azurewebsites.net/api/ProcessTransaction";
+            }
+            $.ajax({
+                type: 'POST',
+                url: entryPoint,
+                headers: {
+                    // 'authorization': 'ApiKey ' + $("#input-apikey").val()
+                },
+                crossDomain: true,
+                data,
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (jsonData) {
+                    console.log(jsonData);
+                    var responseVal = jsonData.record ? JSON.stringify(jsonData.record, null, 2) : JSON.stringify(jsonData, null, 2)
+                    console.log(responseVal)
+                    responseEditor.setValue(responseVal);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr);
+                    console.log(ajaxOptions);
+                    console.log(thrownError);
+                }
+            });
+        }
+
         function convertIdToSampleCode(id) {
             var code = {
                 provider: $("input[name='radio-provider']").val(),
                 service: "fn",
                 action: "execute",
                 transactionID: "abc123",
-                strategy: "demo",
-                message: "hello world",
-                duplicate: document.getElementById("high-availability").checked ? "true" : "false"
+                strategy: "demo"
             }
             if (id === 1) {
                 code.service = "fn";
                 code.action = "execute";
-            } else if(id === 2){
+            } else if (id === 2) {
                 code.service = "db";
                 code.action = "write";
-            } else if(id === 3){
+                code.message = "hello world";
+                code.duplicate = document.getElementById("high-availability").checked ? "true" : "false";
+            } else if (id === 3) {
                 code.service = "db";
                 code.action = "read";
-            } else if(id === 4){
+            } else if (id === 4) {
                 code.service = "io";
                 code.action = "write";
-            } else if(id === 5){
+                code.message = "hello world";
+                code.duplicate = document.getElementById("high-availability").checked ? "true" : "false";
+            } else if (id === 5) {
                 code.service = "io";
                 code.action = "read";
             }
@@ -155,6 +189,7 @@
                     currentTemplate.provider = $(this).val()
                     requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
                 } catch (e) {
+                    console.log(e);
                     console.log('something went wrong')
                 }
             });
@@ -171,6 +206,7 @@
                     currentTemplate.duplicate = state
                     requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
                 } catch (e) {
+                    console.log(e);
                     console.log('something went wrong')
                 }
 
@@ -180,8 +216,11 @@
                 try {
                     var currentTemplate = JSON.parse(requestEditor.getValue());
                     currentTemplate.timestamp = Date.now()
-                    requestEditor.setValue(JSON.stringify(currentTemplate, null, 2));
+                    var stringifiedData = JSON.stringify(currentTemplate, null, 2)
+                    requestEditor.setValue(stringifiedData);
+                    sendRequest(stringifiedData)
                 } catch (e) {
+                    console.log(e);
                     console.log('something went wrong')
                 }
             });

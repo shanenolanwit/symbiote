@@ -126,7 +126,7 @@ resource "azurerm_function_app" "function" {
     WEBSITE_RUN_FROM_PACKAGE          = "https://${azurerm_storage_account.storage.name}.blob.core.windows.net/${azurerm_storage_container.function_code.name}/${azurerm_storage_blob.function_code.name}${data.azurerm_storage_account_sas.sas.sas}"
     OUTPUT_STORAGE_CONNECTION_STRING  = azurerm_storage_account.storage.primary_connection_string
     STORAGE_CONNECTION_STRING         = azurerm_storage_account.storage.primary_connection_string
-    OUTPUT_STORAGE_NAME               = "${var.prefix}${random_integer.random.result}"
+    OUTPUT_STORAGE_NAME               = var.s3_bucket_name
     OUTPUT_COSMOSDB_CONNECTION_STRING = "AccountEndpoint=${azurerm_cosmosdb_account.cosmos_account.endpoint};AccountKey=${azurerm_cosmosdb_account.cosmos_account.primary_master_key};"
     COSMOSDB_CONNECTION_STRING        = "AccountEndpoint=${azurerm_cosmosdb_account.cosmos_account.endpoint};AccountKey=${azurerm_cosmosdb_account.cosmos_account.primary_master_key};"
     GREETING                          = "Using terraform now"
@@ -308,7 +308,7 @@ resource "aws_lambda_function" "lambda" {
       S3_BUCKET_NAME                    = var.s3_bucket_name
       DYNAMO_TABLE_NAME                 = var.dynamo_table_name
       STORAGE_CONNECTION_STRING         = azurerm_storage_account.storage.primary_connection_string
-      OUTPUT_STORAGE_NAME               = "${var.prefix}${random_integer.random.result}"
+      OUTPUT_STORAGE_NAME               = var.s3_bucket_name
       COSMOS_DATABASE                   = var.cosmos_database_name
       COSMOS_TABLE_NAME                 = var.cosmos_table_name
       COSMOSDB_CONNECTION_STRING        = "AccountEndpoint=${azurerm_cosmosdb_account.cosmos_account.endpoint};AccountKey=${azurerm_cosmosdb_account.cosmos_account.primary_master_key};"

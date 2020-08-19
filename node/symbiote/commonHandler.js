@@ -70,7 +70,7 @@ module.exports = async ( event ) => {
             logger.error('unknown action')
         }
     } else if(event.service === 'fn'){ 
-        // used fro simple performance tests
+        // used for simple performance tests
         response.record = `you executed a function on ${event.provider}`;
         response.action = 'fn_execute';
     } else {

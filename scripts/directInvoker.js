@@ -1,8 +1,6 @@
 require('dotenv').config();
 const commonHandler = require('../node/symbiote/commonHandler');
 
-
-// const lambdaUrl = "https://shanenolanwitnodejs.azurewebsites.net/api/HttpTrigger1?code=q0YyQ5/bP49G/R6x6xcUYaWITDCJgavYeNWWp4yoPTpBvMlS4tXS1A=="
 const lambdaUrl = "https://tyz83asrz8.execute-api.eu-west-1.amazonaws.com/test/helloworld"
 
 const post = async (endpoint, payload) => {
@@ -21,16 +19,12 @@ const post = async (endpoint, payload) => {
     }
   };
 
-//   console.log(url.href);
-//   console.log(opts)
-
   const res = await fetch(url.href, opts);
   const { status } = res;
   if(status > 200){
       console.log('fail')
   }
   const json = await res.text();
-//   json.status = status;
 
   return json;
 };
@@ -56,17 +50,15 @@ const event = {
 }
 
 async function start(){
-    // const r = await invoke(event)
-    // console.log(r)
+
     for(let i=0; i < 800; i++){
         const start = Date.now()
         const body = {
             name: 'Shane'
         } 
-        // const r = await post(process.env.LAMBDA_ENDPOINT, body);
         const r = await post(lambdaUrl, body);
+        // console.log(r);
         const time = Date.now() - start;
-        // console.log(r)
         console.log(time)
     }
     

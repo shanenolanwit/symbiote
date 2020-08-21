@@ -2,8 +2,29 @@
 
 > Noun. an organism in a partnership with another such that each profits from their being together.
 
-![Alt text](./website/symbiote.png?raw=true "Optional Title")
+![Alt text](./website/symbiote.png?raw=true "symbiotic spiderman")
+
+
+* [About](#about)
+* [Prerequisites](#prerequisites)
+* [Terraform](#terraform)
+* [API](#api)
+  * [Execute a function](#execute-a-function)
+  * [Write to a database](#write-to-a-database)
+  * [Read from a database](#read-from-a-database)
+  * [Write to file storage](#write-to-file-storage)
+  * [Read from file storage](#read-from-file-storage)
+* [Local Scripts](#local-scripts)
+* [Website](#website)
+* [Node Dependencies](#node-dependencies)
+  + [symbiote](#symbiote-1)
+  + [local scripts](#local-scripts)
+* [Website Dependencies](#website-dependencies)
+  + [CSS](#css)
+  + [Javascript](#javascript)
+
 ## About 
+***symbiote*** is used to combine the *AWS* and *Azure* cloud platforms, to enable and simplify multi cloud high availability. It also allows consumers fine tune their applications performance by allowing them to easily route requests through optimal configuration paths for any given operation. The ***symbiote*** application adapts to its environment to provide an identical and seamless experience regardless of where it is invoked - be it *AWS Lambda*, *Azure Function* or even locally.
 
 ## Prerequisites
 - An AWS Account with Valid Developer Access Keys*
@@ -123,7 +144,7 @@ be sent to either the function or lambda endpoint
   "strategy": "demo"                    // Configuration Reference
 }
 ```
-## Write to a database
+### Write to a database
 ```json
 {
   "provider": "azure",          // Primary Provider
@@ -135,7 +156,7 @@ be sent to either the function or lambda endpoint
   "message": "hello world"      // data to be stored in the message column of the database
 }
 ```
-## Read from a database
+### Read from a database
 ```json
 {
   "provider": "azure",          // Primary Provider
@@ -145,7 +166,7 @@ be sent to either the function or lambda endpoint
   "strategy": "demo",           // Configuration Reference
 }
 ```
-## Write to file storage
+### Write to file storage
 ```json
 {
   "provider": "aws",            // Primary Provider
@@ -157,7 +178,7 @@ be sent to either the function or lambda endpoint
   "message": "hello world"      // data to be stored in the message key of the json payload saved to file
 }
 ```
-## Read from file storage
+### Read from file storage
 ```json
 {
   "provider": "azure",          // Primary Provider

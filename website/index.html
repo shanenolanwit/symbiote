@@ -115,12 +115,13 @@
 
         function sendRequest(data) {
             var provider = $("input[name='radio-provider']").val();
-            var entryPoint = '';
+            var entryPoint = "";
             if(provider === 'aws'){
-                entryPoint = "https://09tafanjj0.execute-api.eu-west-1.amazonaws.com/api/ProcessTransaction";
+                entryPoint = "";
             } else {
-                entryPoint = "https://txmaster-11228.azurewebsites.net/api/ProcessTransaction";
+                entryPoint = "";
             }
+            console.log("entry point: " + entryPoint);
             $.ajax({
                 type: 'POST',
                 url: entryPoint,

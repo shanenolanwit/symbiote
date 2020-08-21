@@ -117,9 +117,9 @@
             var provider = $("input[name='radio-provider']").val();
             var entryPoint = "";
             if(provider === 'aws'){
-                entryPoint = "https://0a8cosnjk0.execute-api.eu-west-1.amazonaws.com/api/ProcessTransaction";
+                entryPoint = "";
             } else {
-                entryPoint = "https://txmaster-18255.azurewebsites.net/api/ProcessTransaction";
+                entryPoint = "";
             }
             console.log("entry point: " + entryPoint);
             $.ajax({

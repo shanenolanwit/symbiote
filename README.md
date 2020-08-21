@@ -2,7 +2,7 @@
 
 > Noun. an organism in a partnership with another such that each profits from their being together.
 
-![Alt text](./website/symbiote.png?raw=true "symbiotic spiderman")
+![Symbiotic Spiderman](./website/symbiote.png?raw=true "symbiotic spiderman")
 
 
 * [About](#about)

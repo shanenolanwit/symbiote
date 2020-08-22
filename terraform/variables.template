@@ -5,7 +5,7 @@ variable "default_log_level" {
 }
 
 variable "aws_region" {
-  description = "The AWS region to create things in."
+  description = "The AWS region to create services in"
   default     = "eu-west-1"
 }
 
@@ -40,9 +40,9 @@ variable "lambda_memory_size" {
   default     = 512
 }
 
-# s3 specific variables
+# s3 variables
 variable "s3_bucket_name" {
-  description = "The s3 bucket name"
+  description = "The s3 (and storage) bucket name"
   default     = ""
 }
 

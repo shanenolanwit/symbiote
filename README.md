@@ -5,24 +5,22 @@
 ![Symbiotic Spiderman](./website/symbiote.png?raw=true "symbiotic spiderman")
 
 
-* [About](#about)
-* [Prerequisites](#prerequisites)
-* [Terraform](#terraform)
-* [API](#api)
+- [About](#about)
+- [Prerequisites](#prerequisites)
+- [Terraform](#terraform)
+- [API](#api)
   * [Execute a function](#execute-a-function)
   * [Write to a database](#write-to-a-database)
   * [Read from a database](#read-from-a-database)
   * [Write to file storage](#write-to-file-storage)
   * [Read from file storage](#read-from-file-storage)
-* [Local Scripts](#local-scripts)
-* [Website](#website)
-* [Node Dependencies](#node-dependencies)
-  + [symbiote](#symbiote-1)
-  + [local scripts](#local-scripts)
-* [Website Dependencies](#website-dependencies)
-  + [CSS](#css)
-  + [Javascript](#javascript)
-
+- [Local Scripts](#local-scripts)
+- [Website](#website)
+- [Dependencies](#dependencies)
+  * [symbiote](#symbiote)
+  * [local scripts](#local-scripts)
+  * [website CDNs](#website-cdns)
+  
 ## About 
 ***symbiote*** is used to combine the *AWS* and *Azure* cloud platforms, to enable and simplify multi cloud high availability. It also allows consumers fine tune their applications performance by allowing them to easily route requests through optimal configuration paths for any given operation. The ***symbiote*** application adapts to its environment to provide an identical and seamless experience regardless of where it is invoked - be it *AWS Lambda*, *Azure Function* or even locally.
 
@@ -220,8 +218,8 @@ node directInvoker.js
 The website provided is a single HTML file which includes external cdn dependencies as well as custom css and javascript. To make this website work for your development environment, update the 
 entry points listed in the `sendRequest` function to match your own AWS and Azure functions.
 
-## Node Dependencies
-
+## Dependencies
+Node dependencies are listed in the `package.json` file
 ### symbiote
 ```json
 {
@@ -246,13 +244,13 @@ entry points listed in the `sendRequest` function to match your own AWS and Azur
   "@azure/storage-blob": "^12.2.0-preview.1"
 }
 ```
-## Website Dependencies
+### website CDNs
 The website uses CDN to load its dependencies which are listed here for completeness
-### CSS
+#### CSS
 ```
 https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
 ```
-### Javascript
+#### Javascript
 ```
 https://code.jquery.com/jquery-3.3.1.min.js
 https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js

@@ -100,7 +100,7 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
-    
+
     <script>
         var requestEditor = ace.edit("request-editor");
         requestEditor.setTheme("ace/theme/monokai");
@@ -117,9 +117,9 @@
             var provider = $("input[name='radio-provider']").val();
             var entryPoint = "";
             if(provider === 'aws'){
-                entryPoint = "";
+                entryPoint = "YOUR_AWS_ENDPOINT";
             } else {
-                entryPoint = "";
+                entryPoint = "YOUR_AZURE_ENDPOINT";
             }
             console.log("entry point: " + entryPoint);
             $.ajax({

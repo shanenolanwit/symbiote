@@ -20,17 +20,29 @@
   * [symbiote](#symbiote)
   * [local scripts](#local-scripts)
   * [website CDNs](#website-cdns)
-  
+
 ## About 
 ***symbiote*** is used to combine the *AWS* and *Azure* cloud platforms, to enable and simplify multi cloud high availability. It also allows consumers fine tune their applications performance by allowing them to easily route requests through optimal configuration paths for any given operation. The ***symbiote*** application adapts to its environment to provide an identical and seamless experience regardless of where it is invoked - be it *AWS Lambda*, *Azure Function* or even locally.
 
 ## Prerequisites
 - An AWS Account with Valid Developer Access Keys*
 - The AWS CLI installed
+  ```
+  aws --version
+  ```
 - An Azure Account with a Valid Developer Account*
 - The Azure CLI installed
+  ```
+  az --version
+  ```
 - Terraform v0.12.23 installed
+  ```
+  terraform --version
+  ```
 - NodeJS v10.15.3 installed
+  ```
+  node --version
+  ```
 
 \* developer meaning a role that can create the following resources
 
